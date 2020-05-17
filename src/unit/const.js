@@ -95,6 +95,8 @@ const eachLines = 20; // 每消除eachLines行, 增加速度
 
 const getParam = (param) => { // 获取浏览器参数
   const r = new RegExp(`\\?(?:.+&)?${param}=(.*?)(?:&.*)?$`);
+  // toString() 相当于 window.location.href;
+  // 此处在 https://chvin.github.io/react-tetris/ 会返回 null
   const m = window.location.toString().match(r);
   return m ? decodeURI(m[1]) : '';
 };
@@ -122,6 +124,9 @@ module.exports = {
   maxPoint,
   eachLines,
   transform,
+  /**
+   * l: 'cn'
+   */
   lan,
   i18n: i18n.data,
 };

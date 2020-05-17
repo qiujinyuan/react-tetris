@@ -43,7 +43,8 @@ var loaders = [
     },
     {
       test: /\.less/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[hash:base64:4]!postcss!less'),
+      // local 表示类名，方便 debug; css?modules 表示启用 CSS Modules 功能
+      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[local]--[hash:base64:4]!postcss!less'),
     }
 ];
 

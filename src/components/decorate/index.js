@@ -6,6 +6,7 @@ import style from './index.less';
 
 export default class Decorate extends React.Component {
   shouldComponentUpdate() {
+    // 不会改变的部分，返回 false 阻止更新
     return false;
   }
   render() {
@@ -30,6 +31,7 @@ export default class Decorate extends React.Component {
           <b className="c" />
           <b className="c" />
           <div className="clear" />
+          {/* 占据空白位置，向左浮动 */}
           <em />
           <b className="c" />
           <p />

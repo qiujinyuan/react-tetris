@@ -178,12 +178,16 @@ const states = {
   overStart: () => {
     clearTimeout(states.fallInterval);
     store.dispatch(actions.lock(true));
+    // QUESTION: 为何会自动刷新，并 dispatch matrix move_block reset lock clear_lines 这几个 action？
+    // 因为调用了 src/components/matrix/index.js line:132 行，即 overEnd
     store.dispatch(actions.reset(true));
     store.dispatch(actions.pause(false));
   },
 
   // 游戏结束动画完成
   overEnd: () => {
+    // QUESTION: HMR 在注释以下几行时不会生效
+    // 因为 eslint 报错了
     store.dispatch(actions.matrix(blankMatrix));
     store.dispatch(actions.moveBlock({ reset: true }));
     store.dispatch(actions.reset(false));

@@ -24,14 +24,17 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      // 返回 viewpoint 的宽度和高度
       w: document.documentElement.clientWidth,
       h: document.documentElement.clientHeight,
     };
   }
   componentWillMount() {
+    // 捕获阶段触发事件
     window.addEventListener('resize', this.resize.bind(this), true);
   }
   componentDidMount() {
+    // 切换到其他浏览器标签页会失去焦点
     if (visibilityChangeEvent) { // 将页面的焦点变换写入store
       document.addEventListener(visibilityChangeEvent, () => {
         states.focus(isFocus());
@@ -61,6 +64,7 @@ class App extends React.Component {
   }
   render() {
     let filling = 0;
+    // IIFE 返回 css 样式
     const size = (() => {
       const w = this.state.w;
       const h = this.state.h;
@@ -70,6 +74,7 @@ class App extends React.Component {
       if (ratio < 1.5) {
         scale = h / 960;
       } else {
+        // 移动端：宽度固定为 640 px，缩放比为 1
         scale = w / 640;
         filling = (h - (960 * scale)) / scale / 3;
         css = {
@@ -78,6 +83,9 @@ class App extends React.Component {
           marginTop: Math.floor(-480 - (filling * 1.5)),
         };
       }
+      // scale 缩放元素，从元素中心点进行缩放；可以使用 transform-origin: 'left top' 指定左上角为中心进行缩放变换
+      // transform 会触发硬件加速，同时 transform 实现懂动画效果比 left 这种更加流畅
+      // https://segmentfault.com/a/1190000008650975
       css[transform] = `scale(${scale})`;
       return css;
     })();
@@ -87,7 +95,9 @@ class App extends React.Component {
         className={style.app}
         style={size}
       >
+        {/*  drop 类是用于点击左侧掉落按钮时，将画面向下移动 5px 并迅速恢复，达到下坠的效果 */}
         <div className={classnames({ [style.rect]: true, [style.drop]: this.props.drop })}>
+          {/* Decorate 为标题 */}
           <Decorate />
           <div className={style.screen}>
             <div className={style.panel}>

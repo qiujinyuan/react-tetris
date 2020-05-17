@@ -44,3 +44,7 @@ jspm_packages
 .idea/react-tetris.iml
 .idea/vcs.xml
 .idea/watcherTasks.xml
+docs/app-1.0.1.js
+yarn.lock
+docs/app-1.0.1.js
+docs/app-1.0.1.js.map

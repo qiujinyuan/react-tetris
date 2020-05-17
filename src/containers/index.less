@@ -12,6 +12,7 @@ body{
   text-align: left;
 }
 
+// CSS Modules 允许使用 :global 声明全局规则，不会被编译成哈希字符串
 :global{
 
   .r{
@@ -36,6 +37,10 @@ body{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  // ::selection CSS伪元素应用于文档中被用户高亮的部分（比如使用鼠标或其他选择设备选中的部分）。
+  // CSS 属性 user-select 控制用户能否选中文本。除了文本框内，它对被载入为 chrome 的内容没有影响。在浏览器中，chrome 指除了网页本身以外任何可视的部分（例如：UI、工具栏、菜单栏、标签）。不要将这个概念与 Google Chrome 浏览器混淆。
+  // none
+  // 元素及其子元素的文本不可选中。 请注意这个Selection 对象可以包含这些元素。 从Firefox 21开始， none 表现的像 -moz-none，因此可以使用 -moz-user-select: text 在子元素上重新启用选择。
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -47,8 +52,10 @@ body{
 .app{
   width: 640px;
   padding-top: 42px;
+  // inset 表示阴影向内
   box-shadow: 0 0 10px #fff inset;
   border-radius: 20px;
+  // 使用绝对定位可以有效的减少重排
   position: absolute;
   top: 50%;
   left: 50%;
@@ -90,6 +97,8 @@ body{
 .rect{
   width: 480px;
   padding: 45px 0 35px;
+  // 边框的样式未定义，它将不可见。这是因为样式默认值为 none
+  // 而宽度不指定则为初始值，chrome 中显示了 3px
   border: #000 solid;
   border-width: 0 10px 10px;
   margin: 0 auto;
